@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAX 100
+int a[MAX][MAX], row, col;
+void inputMatrix(int x[MAX][MAX], int &row, int &col){
+    do
+    {
+        cout<<"enter number row=col:"; cin>>row;
+        cout<<"enter number col=row:"; cin>>col;
+    } while (row<0||col<0); 
+    
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout<<"x["<<i<<"]"<<"["<<j<<"]=";
+            cin>>x[i][j];
+        }
+    }
+}
+void outputMatrix(int x[MAX][MAX], int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout<<"\t"<<x[i][j];
+        }
+        cout<<"\n";
+    }
+}
+// function kiểm tra đối xứng qua ma trận vuông
+int Check_matrix_symmetry(int x[MAX][MAX], int row, int col){
+    int i=0, j=0;
+    int temp=0;
+    while (i<row&&j<col)
+    {
+        if (x[i][j]==x[j][i])
+        {
+            i++;
+            j++;
+            break;
+        }
+        return temp=1;
+    }
+    return temp=0;
+}
+int main(){
+    inputMatrix(a,row,col);
+    outputMatrix(a,row,col);
+    int temp=Check_matrix_symmetry(a,row,col);
+    if (temp==1)
+    {
+        cout<<"doi xung";
+    }else if(temp==0)
+    {
+        cout<<"khong doi xung";
+    }
+    return 0;
+}
