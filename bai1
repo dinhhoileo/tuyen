@@ -1,0 +1,120 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define MAX 100
+int a[MAX][MAX], row, col;
+void inputMatrix(int x[MAX][MAX], int &row, int &col){
+    do
+    {
+        cout<<"enter number row:"; cin>>row;
+        cout<<"enter number col:"; cin>>col;
+    } while (row<0||col<0); 
+    
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout<<"x["<<i<<"]"<<"["<<j<<"]=";
+            cin>>x[i][j];
+        }
+    }
+}
+void outputMatrix(int x[MAX][MAX], int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout<<"\t"<<x[i][j];
+        }
+        cout<<"\n";
+    }
+}
+// function tính tổng
+int Sum_matrix(int x[MAX][MAX], int row, int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            sum+=x[i][j];
+        }
+    }
+    return sum;
+}
+// function tính trung bình cộng
+int Average_Matrix(int x[100][100], int row , int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            sum+=x[i][j];
+        }
+    }
+    double average=double(sum)/(row*col);
+    return average;
+}
+// function tính phần tử dương trong ma trận
+int Average_Matrix_Positive_Number(int x[MAX][MAX], int row , int col){
+    int sum_Positive=0; // khởi tạo giá trị tính tổng phần tử dương
+    int count=0; // khởi tạo biến đếm phần tử dương
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (x[i][j]>0)
+            {
+                sum_Positive+=x[i][j];
+                count++;
+            }
+        }
+    }
+    double average_positive_number=double(sum_Positive)/count;
+    return average_positive_number;
+}
+// function xuất hàng k yêu cầu từ bàn phím
+void Output_K(int x[MAX][MAX], int row, int col){
+    int k;
+    cout<<"enter number k (row):"; cin>>k;
+    for (int j = 0; j < col; j++)
+    {
+        cout<<"\t"<<x[k][j];
+    }
+}
+// function tính tổng nằm trên cột k
+int Sum_col_k(int x[MAX][MAX],int row, int col){
+    int k;
+    cout<<"enter number k (col):"; cin>>k;
+    int Sum_col_k=0;
+    for (int i = 0; i < row; i++)
+    {
+        cout<<"\n"<<x[i][k]<<endl;
+        Sum_col_k+=x[i][k];
+    }
+    return Sum_col_k;
+}
+// function tìm phần tử lớn nhất trong ma trận
+int Find_max_in_Matrix(int x[MAX][MAX], int row, int col){
+    int max=x[0][0];
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (max<x[i][j])
+            {
+                max=x[i][j];
+            }
+        }
+    }
+    return max;
+}
+int main(){
+    inputMatrix(a,row,col);
+    outputMatrix(a,row,col);
+    // cout<<Sum_matrix(a,row,col)<<endl;
+    // cout<<Average_Matrix(a,row,col)<<endl;
+    // cout<<Average_Matrix_Positive_Number(a,row,col);
+    // Output_K(a,row,col);
+    // cout<<Sum_col_k(a,row,col);
+    // cout<<Find_max_in_Matrix(a,row,col);
+    return 0;
+}
