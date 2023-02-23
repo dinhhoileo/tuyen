@@ -1,4 +1,4 @@
-#include<algorithms>
+#include<algorithm>
 #include <iostream>
 #include<math.h>
 using namespace std;
@@ -210,21 +210,6 @@ void addPosRamdomInArray(int *arr, int &n, int index, int number){
     n++;
 }
 // function xóa tất cả phần tử lớn nhất trong mảng
-void deleteMaxNumberArray(int *arr,int n){
-     int max=*arr;
-    for (int i = 1; i < n; i++)
-    {
-        if (max<*(arr+i))
-        {
-            max=*(arr+i);
-        }
-    }
-    for (int i = 0; i < n; i++)
-    {
-        
-    }
-    
-}
 // function sắp xếp mảng tăng dần
 void BubbleSort(int *arr, int n){
     for (int i = 0; i < n; i++)
@@ -238,6 +223,36 @@ void BubbleSort(int *arr, int n){
         }
     }
 }
+// function xóa
+void Delete(int *arr, int &n){
+    for (int i = 0; i < n; i++)
+    {
+        *(arr+i)=*(arr+i+1);
+    }
+    n--;
+}
+// function xóa số chẵn đầu tiên trong mảng
+void deleteFirstEven(int *arr, int &n){
+    for (int i = 0; i < n; i++)
+    {
+        if (*(arr+i)%2==0)
+        {
+            Delete(arr+i,n);
+            break;
+        }
+    }
+}
+void deleteMaxNumberArray(int *arr,int &n){
+     int max=*arr;
+    for (int i = 1; i < n; i++)
+    {
+        if (max<*(arr+i))
+        {
+            max=*(arr+i);
+            Delete(&max,n);
+        }
+    }  
+}
 int main() {
     int n;
     do
@@ -249,25 +264,28 @@ int main() {
     int *arr = new int[n];
     printArray(arr, n);
     outputArray(arr, n);
-    // cout<<"Sum="<<sumArray(arr,n)<<endl;
-    // cout<<"Sum (pos%2) ="<<sumPos(arr,n)<<endl;
-    // cout<<"Sum (pos%3==1) ="<<sumPos1(arr,n)<<endl;
-    // cout<<"Sum prime:"<<sumPrime(arr,n)<<endl;
-    // cout<<"The first even number in array:"<<findEvenNumber(arr,n)<<endl;
-    // cout<<"The first odd number in array:"<<findOddNumber(arr,n)<<endl;
-    // cout<<"The first prime number in array:"<<findPrime(arr,n)<<endl;
-    // cout<<findEvenNumberAtTheEnd(arr,n)<<endl;
-    // cout<<findPerfectSquare(arr,n)<<endl;
-    // cout<<findMaxArray(arr,n);
-    // cout<<countEvenNumber(arr,n);
-    // cout<<countMaxInArray(arr, n);
-    // cout<<findIndexMaxArray(arr,n);
-    // addPosInArray(arr,n,5);
-    // cout<<"After"<<endl;
-    // outputArray(arr,n);
-    // addPosInTailArray(arr,n,10);
-    // addPosRamdomInArray(arr,n,2,6);
-    quickSort(arr,n,0,n-1);
+    cout<<"Sum="<<sumArray(arr,n)<<endl;
+    cout<<"Sum (pos%2) ="<<sumPos(arr,n)<<endl;
+    cout<<"Sum (pos%3==1) ="<<sumPos1(arr,n)<<endl;
+    cout<<"Sum prime:"<<sumPrime(arr,n)<<endl;
+    cout<<"The first even number in array:"<<findEvenNumber(arr,n)<<endl;
+    cout<<"The first odd number in array:"<<findOddNumber(arr,n)<<endl;
+    cout<<"The first prime number in array:"<<findPrime(arr,n)<<endl;
+    cout<<findEvenNumberAtTheEnd(arr,n)<<endl;
+    cout<<findPerfectSquare(arr,n)<<endl;
+    cout<<findMaxArray(arr,n);
+    cout<<countEvenNumber(arr,n);
+    cout<<countMaxInArray(arr, n);
+    cout<<findIndexMaxArray(arr,n);
+    addPosInTailArray(arr,n,10);
+    outputArray(arr,n);
+    addPosRamdomInArray(arr,n,2,6);
+    outputArray(arr,n);
+    BubbleSort(arr,n);
+    outputArray(arr,n);
+    deleteFirstEven(arr,n);
+    outputArray(arr,n);
+    deleteMaxNumberArray(arr,n);
     outputArray(arr,n);
     delete [] arr;
     return 0;
