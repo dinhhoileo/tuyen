@@ -1,0 +1,215 @@
+#include<iostream>
+using namespace std;
+// function nhập ma trận
+void inputMatrix(int **ptr, int row, int col) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            cout << "ptr[" << i << "][" << j << "]=";
+            cin >> *(*(ptr+i)+j);
+        }
+    }
+}
+
+// function xuất ma trận số nguyên
+void outputMatrixInt(int **ptr, int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "\t" << *(*(ptr+i)+j);
+        }
+        cout << endl;
+    }
+}
+
+// function xuất ma trận số thực
+void outputMatrixFloat(float **ptr, int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            cout << "\t" << *(*(ptr+i)+j);
+        }
+        cout << endl;
+    }
+}
+// function tính tổng phần tử ma trận
+int sumMatrix(int **ptr, int row, int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            sum+=*(*(ptr+i)+j);
+        }
+    }
+    return sum;
+}
+// function tính tổng các phần tử chẵn trong ma trận
+int sumEvenMatrix(int **ptr, int row, int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (*(*(ptr+i)+j)%2==0)
+            {
+                sum+=*(*(ptr+i)+j);
+            }
+        }
+    }
+    return sum;
+}
+// function tính tổng các phần tử lẻ trong ma trận
+int sumOddMatrix(int **ptr, int row, int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (*(*(ptr+i)+j)%2!=0)
+            {
+                sum+=*(*(ptr+i)+j);
+            }
+        }
+    }
+    return sum;
+}
+bool isPrime(int num) {
+    if (num < 2) return false;
+    for (int i = 2; i <= num / 2; i++) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
+//function tính tổng số nguyên tố 
+int sumPrimeMatrix(int **ptr, int row, int col){
+    int sum=0;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (isPrime(*(*(ptr+i)+j)))
+            {
+                sum+=*(*(ptr+i)+j);
+            }
+        }
+    }
+    return sum;
+}
+// function tính tổng trên đường chéo chính
+int sumMainDiagonalMatrix(int **ptr, int row, int col){
+    int sum=0;
+    int i=0;
+    int j=0;
+    while (i<row&&j<col)
+    {
+        sum+=*(*(ptr+i)+j);
+        i++;
+        j++;
+    }
+    return sum;
+}
+// fucntion tính tổng trên đường chéo phụ
+int sumAuxiliaryDiagonalMatrix(int **ptr, int row, int col){
+    int sum=0;
+    int i=0,j=col-1;
+    while (i<row&&j<col)
+    {
+        sum+=*(*(ptr+i)+j);
+        i++;
+        j--;
+    }
+    return sum;
+}
+// function tìm số chẵn đầu tiên trong ma trận
+int findTheFirstEvenNumberMatrix(int **ptr, int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (*(*(ptr+i)+j)%2==0)
+            {
+                return *(*(ptr+i)+j);
+            }
+        }
+    }
+    return -1;
+}
+// function tìm số lẻ đầu tiên trong ma trận
+int findTheFirstOddNumberMatrix(int **ptr, int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (*(*(ptr+i)+j)%2!=0)
+            {
+                return *(*(ptr+i)+j);
+            }
+        }
+    }
+    return -1;
+}
+// function tìm số nguyên tố đầu tiên trong ma trận
+int findTheFirstPrimeNumberMatrix(int **ptr , int row, int col){
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
+        {
+            if (isPrime(*(*(ptr+i)+j)))
+            {
+                return *(*(ptr+i)+j);
+            }
+        }
+    }
+    return -1;
+}
+int main(){
+    int row, col;
+
+    do {
+        cout << "Nhap so hang: ";
+        cin >> row;
+        cout << "Nhap so cot: ";
+        cin >> col;
+    } while (row < 0 || col > 100);
+
+    // Cấp phát động bộ nhớ cho ma trận số nguyên
+    int **ptr = new int*[row];
+    for (int i = 0; i < row; i++) {
+        ptr[i] = new int[col];
+    }
+
+    // Cấp phát động bộ nhớ cho ma trận số thực
+    float **matrix = new float*[row];
+    for (int i = 0; i < row; i++) {
+        matrix[i] = new float[col];
+    }
+
+    // Nhập giá trị cho ma trận số nguyên
+    inputMatrix(ptr, row, col);
+    // Xuất ma trận số nguyên
+    outputMatrixInt(ptr, row, col);
+    // Xuất ma trận số thực
+    outputMatrixFloat(matrix, row, col);
+    cout<<sumMatrix(ptr,row,col)<<endl;
+    cout<<sumEvenMatrix(ptr,row,col)<<endl;
+    cout<<sumOddMatrix(ptr,row,col)<<endl;
+    cout<<sumPrimeMatrix(ptr,row,col)<<endl;
+    cout<<sumMainDiagonalMatrix(ptr,row,col)<<endl;
+    cout<<sumAuxiliaryDiagonalMatrix(ptr,row,col)<<endl;
+    cout<<findTheFirstEvenNumberMatrix(ptr,row,col)<<endl;
+    cout<<findTheFirstOddNumberMatrix(ptr,row,col)<<endl;
+    cout<<findTheFirstPrimeNumberMatrix(ptr,row,col)<<endl;
+    // Giải phóng bộ nhớ
+    for (int i = 0; i < row; i++) {
+        delete[] ptr[i];
+    }
+    delete[] ptr;
+    for (int i = 0; i < row; i++) {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
+
+    return 0;
+}
